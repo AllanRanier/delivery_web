@@ -20,40 +20,62 @@ class MenuButton extends StatelessWidget {
     final isSelected = menuSelected == menu;
     return LayoutBuilder(
       builder: (_, constrains) {
-        return Material(
-          color: Colors.transparent,
-          child: InkWell(
-            onTap: () => onPressed(menu),
-            borderRadius: BorderRadius.circular(20),
-            child: Container(
-              margin: const EdgeInsets.all(10),
-              padding: const EdgeInsets.all(5),
-              decoration: isSelected
-                  ? BoxDecoration(
-                      borderRadius: BorderRadius.circular(10),
-                      color: const Color(0XFFFFF5E2),
-                    )
-                  : null,
-              child: Row(
-                children: [
-                  Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: Image.asset(
-                        'assets/images/icons/${isSelected ? menu.assetIcon : menu.assetIcon}'),
-                  ),
-                  const SizedBox(
-                    width: 10,
-                  ),
-                  Flexible(
-                    child: Text(
-                      menu.label,
-                      overflow: TextOverflow.ellipsis,
-                      style: isSelected
-                          ? context.textStyles.textBold
-                          : context.textStyles.textRegular,
+        return Visibility(
+          visible: constrains.maxWidth != 90,
+          replacement: Container(
+            margin: const EdgeInsets.all(10),
+            padding: const EdgeInsets.all(5),
+            decoration: isSelected
+                    ? BoxDecoration(
+                        borderRadius: BorderRadius.circular(10),
+                        color: const Color(0XFFFFF5E2),
+                      )
+                    : null,
+            child: Tooltip(
+              message: menu.label,
+              child: IconButton(
+                onPressed: () => onPressed(menu),
+                icon: Image.asset(
+                  'assets/images/icons/${isSelected ? menu.assetIcon : menu.assetIcon}',
+                ),
+              ),
+            ),
+          ),
+          child: Material(
+            color: Colors.transparent,
+            child: InkWell(
+              onTap: () => onPressed(menu),
+              borderRadius: BorderRadius.circular(20),
+              child: Container(
+                margin: const EdgeInsets.all(10),
+                padding: const EdgeInsets.all(5),
+                decoration: isSelected
+                    ? BoxDecoration(
+                        borderRadius: BorderRadius.circular(10),
+                        color: const Color(0XFFFFF5E2),
+                      )
+                    : null,
+                child: Row(
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Image.asset(
+                          'assets/images/icons/${isSelected ? menu.assetIcon : menu.assetIcon}'),
                     ),
-                  ),
-                ],
+                    const SizedBox(
+                      width: 10,
+                    ),
+                    Flexible(
+                      child: Text(
+                        menu.label,
+                        overflow: TextOverflow.ellipsis,
+                        style: isSelected
+                            ? context.textStyles.textBold
+                            : context.textStyles.textRegular,
+                      ),
+                    ),
+                  ],
+                ),
               ),
             ),
           ),
