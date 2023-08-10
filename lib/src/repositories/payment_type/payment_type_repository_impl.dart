@@ -52,6 +52,7 @@ class PaymentTypeRepositoryImpl implements PaymentTypeRepository {
       if (model.id != null) {
         await client.put(
           '/payment-types/${model.id}',
+          data: model.toMap(),
         );
       } else {
         await client.post(

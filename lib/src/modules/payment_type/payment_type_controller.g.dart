@@ -81,12 +81,47 @@ mixin _$PaymentTypeController on PaymentTypeControllerBase, Store {
     });
   }
 
+  late final _$_paymentTypeSelectedAtom = Atom(
+      name: 'PaymentTypeControllerBase._paymentTypeSelected', context: context);
+
+  PaymentTypeModel? get paymentTypeSelected {
+    _$_paymentTypeSelectedAtom.reportRead();
+    return super._paymentTypeSelected;
+  }
+
+  @override
+  PaymentTypeModel? get _paymentTypeSelected => paymentTypeSelected;
+
+  @override
+  set _paymentTypeSelected(PaymentTypeModel? value) {
+    _$_paymentTypeSelectedAtom.reportWrite(value, super._paymentTypeSelected,
+        () {
+      super._paymentTypeSelected = value;
+    });
+  }
+
   late final _$loadPaymentAsyncAction =
       AsyncAction('PaymentTypeControllerBase.loadPayment', context: context);
 
   @override
   Future<void> loadPayment() {
     return _$loadPaymentAsyncAction.run(() => super.loadPayment());
+  }
+
+  late final _$addPaymentAsyncAction =
+      AsyncAction('PaymentTypeControllerBase.addPayment', context: context);
+
+  @override
+  Future<void> addPayment() {
+    return _$addPaymentAsyncAction.run(() => super.addPayment());
+  }
+
+  late final _$editPaymentAsyncAction =
+      AsyncAction('PaymentTypeControllerBase.editPayment', context: context);
+
+  @override
+  Future<void> editPayment(PaymentTypeModel payment) {
+    return _$editPaymentAsyncAction.run(() => super.editPayment(payment));
   }
 
   late final _$PaymentTypeControllerBaseActionController =
