@@ -71,7 +71,7 @@ abstract class PaymentTypeControllerBase with Store {
   }
 
   @action
-  void savePayment({
+  Future<void> savePayment({
     int? id,
     required String name,
     required String acronym,

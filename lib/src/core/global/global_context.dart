@@ -8,7 +8,9 @@ class GlobalContext {
   late final GlobalKey<NavigatorState> _navigatorKey;
 
   static GlobalContext? _instance;
+  
   GlobalContext._();
+
   static GlobalContext get instance {
     _instance ??= GlobalContext._();
     return _instance!;
