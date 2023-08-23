@@ -59,7 +59,9 @@ class ProductItem extends StatelessWidget {
                     ),
                   ),
                   TextButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      
+                    },
                     child: const Text('Editar'),
                   ),
                 ],

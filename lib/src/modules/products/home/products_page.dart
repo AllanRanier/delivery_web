@@ -25,7 +25,7 @@ class _ProdusctsPageState extends State<ProdusctsPage> with Loader, Messages {
   @override
   void initState() {
     WidgetsBinding.instance.addPostFrameCallback((_) {
-      statusDispose = reaction((_) => controller.status, (status) {
+      statusDispose = reaction((_) => controller.status, (status) async {
         switch (status) {
           case ProductStateStatus.initial:
             break;
@@ -38,6 +38,11 @@ class _ProdusctsPageState extends State<ProdusctsPage> with Loader, Messages {
           case ProductStateStatus.error:
             hideLoader();
             showError('Erro ao buscar produtos');
+            break;
+          case ProductStateStatus.addOrUpdateProduct:
+            hideLoader();
+           await Modular.to.pushNamed('/products/detail');
+              controller.loadProducts();
             break;
         }
       });
@@ -64,8 +69,7 @@ class _ProdusctsPageState extends State<ProdusctsPage> with Loader, Messages {
             title: 'ADEMINISTRAR PRODUTOS',
             buttonLabel: 'ADICIONAR PRODUTOS',
             buttonPressed: () async {
-              await Modular.to.pushNamed('/products/detail');
-              controller.loadProducts();
+              
             },
             searchChange: (value) {
               debouncer.call(() {
